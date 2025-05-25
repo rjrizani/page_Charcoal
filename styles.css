@@ -12,19 +12,23 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
     line-height: 1.6;
     color: var(--primary-color);
     background-color: var(--background-color);
+    display: flex; /* Make body a flex container to push footer down */
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
     background-color: var(--primary-color);
     color: var(--background-color);
-    padding: 1rem;
+    padding: 1rem 2rem; /* Add horizontal padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 header nav {
@@ -32,124 +36,505 @@ header nav {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    max-width: 1200px; /* Constrain nav width */
+    margin: 0 auto; /* Center nav */
 }
 
-header .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-right: 20px;
+header .logo h1 {
+    font-size: 1.8rem; /* Slightly larger logo */
+    font-weight: 600;
+    margin: 0;
 }
 
 header ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
-}
-
-header li {
-    margin-right: 20px;
+    gap: 25px; /* Spacing between nav items */
 }
 
 header a {
     color: var(--background-color);
     text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative; /* For underline effect */
+    transition: color 0.3s ease;
 }
 
+header a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease-in-out;
+}
+
+header a:hover::after {
+    width: 100%;
+}
+
+header a:hover {
+    color: var(--accent-color); /* Subtle hover color change */
+}
+
+main {
+    flex-grow: 1; /* Allow main content to take up available space */
+}
+
+/* Reusable Button Style */
+.button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border: none;
+    padding: 14px 28px; /* Larger padding for prominence */
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px; /* Rounded corners */
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Button shadow */
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: darken(var(--accent-color), 10%); /* Darken on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.button-small {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+
+/* Hero Section (Main Page) */
 .hero {
-    background-image: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-    background-image: url(images/arang.jpeg);
+    
+    background-image: linear-gradient(rgba(24, 28, 20, 0.7), rgba(60, 61, 55, 0.7)), url('images/arang.jpeg'); 
+    
     background-size: cover;
-    height: 100vh;
+    background-position: center;
+    min-height: 80vh; /* Use min-height for flexibility */
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--background-color);
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* For any potential animations */
 }
 
 .hero-content {
-    text-align: center;
-    padding: 20px;
+    max-width: 800px;
+    padding: 30px;
+    animation: fadeIn 1.5s ease-out; /* Simple fade-in animation */
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 4.5rem; /* Larger heading */
+    margin-bottom: 20px;
+    line-height: 1.1;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
+.hero p {
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* Features Section */
 .features {
-    padding: 2rem;
+    padding: 60px 20px;
+    text-align: center;
+    background-color: var(--background-color); /* Ensures background color */
 }
 
-.features h2 {
-    text-align: center;
+.features h2, .product-listing h2, .testimonials h2, .call-to-action h2 {
+    font-size: 2.8rem;
+    margin-bottom: 50px;
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.features h2::after, .product-listing h2::after, .testimonials h2::after, .call-to-action h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
 }
 
 .feature-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 30px; /* Spacing between cards */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .feature-card {
-    margin: 20px;
-    padding: 20px;
-    background-color: var(--background-color);
-    border: 1px solid var(--accent-color);
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: calc(33.33% - 40px);
+    flex: 1 1 300px; /* Allows cards to grow/shrink and wrap */
+    background-color: #FFFFFF; /* Pure white for contrast */
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* More pronounced shadow */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(105, 117, 101, 0.1); /* Subtle border */
+}
+
+.feature-card:hover {
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 .feature-card i {
-    font-size: 2rem;
+    font-size: 3.5rem; /* Larger icons */
     color: var(--accent-color);
+    margin-bottom: 25px;
 }
 
+.feature-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.feature-card p {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+/* Testimonials Section */
 .testimonials {
-    padding: 2rem;
+    padding: 60px 20px;
     background-color: var(--secondary-color);
     color: var(--background-color);
+    text-align: center;
+}
+
+.testimonials h2 {
+    color: var(--background-color); /* Heading color in this section */
+}
+.testimonials h2::after {
+    background-color: var(--background-color); /* Underline for this section */
 }
 
 .testimonial-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .testimonial-card {
-    margin: 20px;
-    padding: 20px;
-    background-color: var(--background-color);
-    border: 1px solid var(--accent-color);
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: calc(33.33% - 40px);
-    color: var(--primary-color);
+    flex: 1 1 300px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    color: var(--primary-color); /* Text color inside card */
+    text-align: center;
+    position: relative;
+    font-style: italic;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-card p {
+    font-size: 1.15rem;
+    margin-bottom: 20px;
 }
 
 .testimonial-card span {
-    font-style: italic;
+    display: block;
+    font-style: normal; /* Override italic for name */
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-top: 15px;
 }
 
+/* Call to Action Section */
 .call-to-action {
-    padding: 2rem;
+    padding: 60px 20px;
+    text-align: center;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+
+.call-to-action p {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--secondary-color);
+}
+
+
+/* --- NEW PRODUCT PAGE STYLES --- */
+
+.products-hero {
+    background-image: linear-gradient(rgba(24, 28, 20, 0.6), rgba(60, 61, 55, 0.6)), url('https://via.placeholder.com/1600x900/697565/ECDFCC?text=Charcoal+Production'); /* Different image for products hero */
+    background-size: cover;
+    background-position: center;
+    min-height: 60vh; /* Shorter hero for internal pages */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--background-color);
     text-align: center;
 }
 
-.call-to-action button {
-    background-color: var(--accent-color);
-    color: var(--background-color);
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
+.products-hero-content {
+    max-width: 700px;
+    padding: 30px;
 }
 
+.products-hero h1 {
+    font-size: 3.8rem;
+    margin-bottom: 15px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.products-hero p {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.product-listing {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: var(--background-color);
+}
+
+.product-grid {
+    display: grid; /* Using CSS Grid for product layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden; /* Ensures image corners are rounded */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-image-container {
+    width: 100%;
+    padding-bottom: 75%; /* 4:3 Aspect Ratio (300/400 = 0.75) */
+    position: relative;
+    overflow: hidden;
+    background-color: var(--secondary-color); /* Placeholder background */
+}
+
+.product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers container */
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.product-card h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: 25px 25px 15px;
+    font-weight: 600;
+}
+
+.product-card p {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    padding: 0 25px;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Pushes button to bottom */
+}
+
+.product-features {
+    list-style: none;
+    padding: 0 25px;
+    margin-bottom: 25px;
+}
+
+.product-features li {
+    font-size: 1rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.product-features li i {
+    color: var(--accent-color);
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.product-card .button {
+    margin: 0 25px 25px; /* Adjust button margin for product cards */
+    width: calc(100% - 50px); /* Make button full width of padding */
+    text-align: center;
+}
+
+
+/* Footer */
 footer {
     background-color: var(--primary-color);
     color: var(--background-color);
-    padding: 1rem;
+    padding: 1.5rem;
     text-align: center;
-    clear: both;
+    margin-top: auto; /* Pushes footer to bottom */
+    font-size: 0.9rem;
 }
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+    .products-hero h1 {
+        font-size: 3rem;
+    }
+    .feature-card, .testimonial-card {
+        flex: 1 1 45%; /* Two columns on tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    header nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    header ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    .hero p {
+        font-size: 1.2rem;
+    }
+    .products-hero h1 {
+        font-size: 2.5rem;
+    }
+    .products-hero p {
+        font-size: 1.1rem;
+    }
+    .features h2, .product-listing h2, .testimonials h2, .call-to-action h2 {
+        font-size: 2.2rem;
+    }
+    .feature-card, .testimonial-card, .product-card {
+        flex: 1 1 100%; /* Single column on mobile */
+        max-width: 400px; /* Constrain width on smaller screens */
+    }
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .product-card .button {
+        width: calc(100% - 50px);
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 1rem;
+    }
+    header .logo h1 {
+        font-size: 1.5rem;
+    }
+    header ul {
+        gap: 10px;
+        font-size: 0.9rem;
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .button {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    .features h2, .product-listing h2, .testimonials h2, .call-to-action h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    .feature-card, .testimonial-card, .product-card {
+        padding: 25px;
+    }
+    .product-card h3 {
+        font-size: 1.5rem;
+        margin: 20px 20px 10px;
+    }
+    .product-card p {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+    .product-features {
+        padding: 0 20px;
+    }
+    .product-card .button {
+        margin: 0 20px 20px;
+        width: calc(100% - 40px);
+    }
+}
+
+/* SCSS-like darken function (not actual SCSS, but for explanation) */
+/* function darken($color, $percentage) {
+    // This would be implemented in a preprocessor like SASS.
+    // For pure CSS, you'd manually calculate or use CSS variables with opacity.
+    // Example: background-color: rgba(darken(var(--accent-color)), 0.9);
+} */
