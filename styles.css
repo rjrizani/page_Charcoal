@@ -298,7 +298,7 @@ main {
 /* --- NEW PRODUCT PAGE STYLES --- */
 
 .products-hero {
-    background-image: linear-gradient(rgba(24, 28, 20, 0.6), rgba(60, 61, 55, 0.6)), url('https://via.placeholder.com/1600x900/697565/ECDFCC?text=Charcoal+Production'); /* Different image for products hero */
+    background-image: linear-gradient(rgba(24, 28, 20, 0.6), rgba(60, 61, 55, 0.6)), url('images/products.webp'); /* Different image for products hero */
     background-size: cover;
     background-position: center;
     min-height: 60vh; /* Shorter hero for internal pages */
